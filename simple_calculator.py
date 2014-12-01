@@ -19,7 +19,7 @@ from PyQt4.QtGui import *
 
 __version__ = "0.3.0"
 __author__ = "David Hall"
-__last_update__ = "09 Nov 2014"
+__last_update__ = "01 Dec 2014"
 
 
 class SimpleCalc(QMainWindow):
@@ -47,16 +47,16 @@ class SimpleCalc(QMainWindow):
         self.setCentralWidget(self.history)
 
         self.labels = list("hgfedcbazyx")
-        self.stack = QTableWidget(len(self.labels), 1)
-        self.stack.setHorizontalHeaderLabels(("Stack",))
-        self.stack.setVerticalHeaderLabels(self.labels)
-        self.stack.setFixedWidth(120)
-        self.stack.setColumnWidth(0, 100)
-        self.getStack()
+        self.register = QTableWidget(len(self.labels), 1)
+        self.register.setHorizontalHeaderLabels(("Register",))
+        self.register.setVerticalHeaderLabels(self.labels)
+        self.register.setFixedWidth(120)
+        self.register.setColumnWidth(0, 100)
+        self.getRegister()
 
         dockwidget = QDockWidget("", self)
         dockwidget.setAllowedAreas(Qt.RightDockWidgetArea)
-        dockwidget.setWidget(self.stack)
+        dockwidget.setWidget(self.register)
         self.addDockWidget(Qt.RightDockWidgetArea, dockwidget)
 
         self.input = QLineEdit("Input Expression & Press Enter")
@@ -84,9 +84,9 @@ class SimpleCalc(QMainWindow):
             var = error.message.split("'")[1].lower()
             if var in self.labels:
                 index = self.labels.index(var)
-                item = self.stack.takeItem(index, 0)
+                item = self.register.takeItem(index, 0)
                 text = text.replace(var, item.text())
-                self.stack.setItem(index, 0, item)
+                self.register.setItem(index, 0, item)
                 self.updateUI(text)
             else:
                 self.history.append(
@@ -97,26 +97,26 @@ class SimpleCalc(QMainWindow):
 
         else:
                 self.history.append("%s = <b>%s</b>" % (text, result))
-                self.pushStack(result)
+                self.pushRegister(result)
                 self.input.setFocus(True)
                 self.input.selectAll()
         return
 
-    def getStack(self):
+    def getRegister(self):
         for i in range(len(self.labels)):
 #            item = QTableWidgetItem("< %s >" % self.labels[i])
             item = QTableWidgetItem("--")
             item.setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
-            self.stack.setItem(i, 0, item)
+            self.register.setItem(i, 0, item)
         return
 
-    def pushStack(self, result):
+    def pushRegister(self, result):
         for row in range(len(self.labels)):
-            self.stack.setItem(row, 0, self.stack.takeItem(row + 1, 0))
+            self.register.setItem(row, 0, self.register.takeItem(row + 1, 0))
 ##        result = self.toEngNotation(result)
         item = QTableWidgetItem(str(result))
         item.setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
-        self.stack.setItem(row, 0, item)
+        self.register.setItem(row, 0, item)
         return
 
     def toEngNotation(self, number, digits=5):
