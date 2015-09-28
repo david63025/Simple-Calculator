@@ -52,6 +52,7 @@ class SimpleCalc(QMainWindow):
         self.register.setVerticalHeaderLabels(self.labels)
         self.register.setFixedWidth(120)
         self.register.setColumnWidth(0, 100)
+        self.register.setAlternatingRowColors(True)
         self.getRegister()
 
         dockwidget = QDockWidget("", self)
@@ -97,6 +98,7 @@ class SimpleCalc(QMainWindow):
 
         else:
                 self.history.append("%s = <b>%s</b>" % (text, result))
+#               TODO: put result in global clipboard so other apps can use
                 self.pushRegister(result)
                 self.input.setFocus(True)
                 self.input.selectAll()
