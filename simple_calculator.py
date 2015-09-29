@@ -50,8 +50,8 @@ class SimpleCalc(QMainWindow):
         self.register = QTableWidget(len(self.labels), 1)
         self.register.setHorizontalHeaderLabels(("Register",))
         self.register.setVerticalHeaderLabels(self.labels)
-        self.register.setFixedWidth(120)
-        self.register.setColumnWidth(0, 100)
+        self.register.setFixedWidth(125)
+        self.register.horizontalHeader().setResizeMode(0, QHeaderView.Stretch)
         self.register.setAlternatingRowColors(True)
         self.getRegister()
 
