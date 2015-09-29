@@ -98,7 +98,7 @@ class SimpleCalc(QMainWindow):
 
         else:
                 self.history.append("%s = <b>%s</b>" % (text, result))
-#               TODO: put result in global clipboard so other apps can use
+##              TODO: put result in global clipboard so other apps can use
                 self.pushRegister(result)
                 self.input.setFocus(True)
                 self.input.selectAll()
@@ -106,7 +106,7 @@ class SimpleCalc(QMainWindow):
 
     def getRegister(self):
         for i in range(len(self.labels)):
-#            item = QTableWidgetItem("< %s >" % self.labels[i])
+##            item = QTableWidgetItem("< %s >" % self.labels[i])
             item = QTableWidgetItem("--")
             item.setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
             self.register.setItem(i, 0, item)
@@ -117,7 +117,7 @@ class SimpleCalc(QMainWindow):
             self.register.setItem(row, 0, self.register.takeItem(row + 1, 0))
 ##        result = self.toEngNotation(result)
         item = QTableWidgetItem(str(result))
-        item.setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
+        item.setTextAlignment(Qt.AlignCenter)
         self.register.setItem(row, 0, item)
         return
 
