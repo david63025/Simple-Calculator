@@ -17,9 +17,9 @@ from math import *
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-__version__ = "0.3.0"
+__version__ = "0.4.0"
 __author__ = "David Hall"
-__last_update__ = "01 Dec 2014"
+__last_update__ = "29 Sep 2015"
 
 
 class SimpleCalc(QMainWindow):
@@ -36,11 +36,11 @@ class SimpleCalc(QMainWindow):
             'p', 'n', 'u', 'm', '', 'k', 'M', 'G', 'T')
         self.display = (
             {'mode': 'eng', 'digits': 4})
-            # Controls appearance of results in stack, doesn't change
-            #   internal representation of a number. Full precision is
-            #   maintained.
-            # Available modes are fix, eng, and sci.
-            # Digits is number of significant digits
+##            Controls appearance of results in stack, doesn't change
+##              internal representation of a number. Full precision is
+##              maintained.
+##            Available modes are fix, eng, and sci.
+##            Digits is number of significant digits
 
         self.history = QTextBrowser()
         self.history.setFixedHeight(385)
@@ -108,7 +108,7 @@ class SimpleCalc(QMainWindow):
         for i in range(len(self.labels)):
 ##            item = QTableWidgetItem("< %s >" % self.labels[i])
             item = QTableWidgetItem("--")
-            item.setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
+            item.setTextAlignment(Qt.AlignCenter)
             self.register.setItem(i, 0, item)
         return
 
